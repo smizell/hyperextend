@@ -81,7 +81,11 @@ Prefix for use with curies
 
 ### `rels`
 
-Array of link relations
+Array of link relations. REQUIRED
+
+### `href`
+
+URL for resource/link. REQUIRED
 
 ### `responseTypes`
 
@@ -201,7 +205,6 @@ Extends `BaseLink`
       }
     },
     "properties": { "$ref": "http://hyperschema.org/core/properties#/definitions/propertyObject" },
-    "href": { "$ref": "http://hyperschema.org/core/link#/definitions/href" },
     "templates": {
       "type": "array",
       "items": { "$ref": "#/definitions/template" }
@@ -233,6 +236,10 @@ Semantic for properity
 * `value`
 * `typeOf`
 * `label`
+
+### Properties
+
+Properites of resource
 
 ### `templates`
 
