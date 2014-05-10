@@ -128,6 +128,7 @@ Extends `Base`
     }
   }
 }
+```
 
 ## TemplatedLink
 
