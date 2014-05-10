@@ -140,8 +140,8 @@ Extends `BaseLink`
     "hreft": { "$ref": "http://hyperschema.org/core/link#/definitions/hrefTemplated" },
     "params": { 
       "type": "array",
-      "items": { "$ref": "#/definitions/param" },
-    }
+      "items": { "$ref": "#/definitions/param" }
+    },
     "param": { "$ref": "http://hyperschema.org/extend/hyperextend/field#/definitions/field" }
   }
 }
