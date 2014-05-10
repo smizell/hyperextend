@@ -60,8 +60,9 @@ Extends `Base`
       }
     },
     "rels": { "$ref": "http://hyperschema.org/core/link#/definitions/rels" },
+    "href": { "$ref": "http://hyperschema.org/core/link#/definitions/href" },
     "responseTypes": { "$ref": "http://hyperschema.org/core/link#/definitions/mediaTypes" },
-    "availableMethods": { "$ref": "http://hyperschema.org/protocols/http#/definitions/methods" }
+    "availableMethods": { "$ref": "http://hyperschema.org/protocols/http#/definitions/methods" },
     "embedAs": { "type": "string" }
   }
 }
@@ -96,6 +97,8 @@ Instructs client on how to embed the resource/link (TBD)
 
 ## Field
 
+Extends `Base`
+
 ```json
 {
   "definitions": {
@@ -103,6 +106,7 @@ Instructs client on how to embed the resource/link (TBD)
       "properties": {
         "name": { "$ref": "http://hyperschema.org/core/fields#/definitions/name" },
         "defaultValue": { "$ref": "http://hyperschema.org/core/fields#/definitions/value" },
+        "currentValue": { "$ref": "http://hyperschema.org/core/fields#/definitions/value" },
         "options": {
           "type": "array",
           "items": { "$ref": "#/definitions/option" }
@@ -196,6 +200,8 @@ Extends `BaseLink`
         "label": { "$ref": "http://hyperschema.org/core/properties#/definitions/label" }
       }
     },
+    "properties": { "$ref": "http://hyperschema.org/core/properties#/definitions/propertyObject" },
+    "href": { "$ref": "http://hyperschema.org/core/link#/definitions/href" },
     "templates": {
       "type": "array",
       "items": { "$ref": "#/definitions/template" }
@@ -244,56 +250,31 @@ Template for different media type
 
 These include data that is specific to instances
 
-### Resource Instance
+## FullResource
 
-Extends `BaseResource
-
-```json
-{
-  "definitions": {
-    "href": { "$ref": "http://hyperschema.org/core/link#/definitions/href" },
-    "properties": { "$ref": "http://hyperschema.org/core/properties#/definitions/propertyObject" },
-  }
-}
-```
-
-#### `href`
-
-URL for resource
-
-#### `properties`
-
-Properties for resource
-
-### Link Instance
-
-Extends `BaseLink`
+Extends `BaseResource`
 
 ```json
 {
   "definitions": {
-    "href": { "$ref": "http://hyperschema.org/core/link#/definitions/href" },
+    "properties": {
+      "links": {
+        "type": "array",
+        "item": { "$ref": "http://hyperschema.org/extend/hyperextend/link#/definitions/link" }
+      },
+      "linkTemplates": {
+        "type": "array",
+        "item": { "$ref": "http://hyperschema.org/extend/hyperextend/linkTemplate#/definitions/linkTemplate" }
+      },
+      "queries": {
+        "type": "array",
+        "item": { "$ref": "http://hyperschema.org/extend/hyperextend/query#/definitions/query" }
+      },
+      "resources": {
+        "type": "array",
+        "item": { "$ref": "http://hyperschema.org/extend/hyperextend/resource#/definitions/resource" }
+      }
+    }
   }
 }
 ```
-
-#### `href`
-
-URL for link
-
-### Field Instance
-
-Extends `Field`
-
-```json
-{
-  "definitions": {
-    "currentValue": { "$ref": "http://hyperschema.org/core/fields#/definitions/value" },
-  }
-}
-```
-
-#### `currentValue`
-
-Currnet value of field
-
