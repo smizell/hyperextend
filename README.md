@@ -99,7 +99,7 @@ Available HTTP methods for resource/link
 
 Instructs client on how to embed the resource/link (TBD)
 
-## Field
+## BaseField
 
 Extends `Base`
 
@@ -127,6 +127,22 @@ Extends `Base`
   }
 }
 ```
+
+## Field
+
+Extends `BaseField`
+
+```json
+{
+  "properties": {
+    "currentValue": { "$ref": "http://hyperschema.org/core/fields#/definitions/value" },
+  }
+}
+```
+
+### `currentValue`
+
+The current value of the field
 
 ## Link
 
@@ -209,7 +225,6 @@ Extends `Link`
         "label": { "$ref": "http://hyperschema.org/core/properties#/definitions/label" }
       }
     },
-    "properties": { "$ref": "http://hyperschema.org/core/properties#/definitions/propertyObject" },
     "templates": {
       "type": "array",
       "items": { "$ref": "#/definitions/template" }
@@ -260,13 +275,14 @@ Template for different media type
 * `fields` - Specifies fields, if applicable
 * `jsonSchema` - Specifies JSON Schema, if applicable
 
-## FullResource
+## Resource
 
 Extends `BaseResource`
 
 ```json
 {
   "properties": {
+    "properties": { "$ref": "http://hyperschema.org/core/properties#/definitions/propertyObject" },
     "links": {
       "type": "array",
       "item": { "$ref": "http://hyperschema.org/extend/hyperextend/link#/definitions/link" }
