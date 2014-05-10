@@ -9,7 +9,7 @@ The base properties for any component.
 ```json
 {
   "title": "Base",
-  "description": "The base object for Hyperextend"
+  "description": "The base object for Hyperextend",
   "type": "object",
   "properties": {
     "id": { "$ref": "http://hyperschema.org/core/base#/definitions/id" },
