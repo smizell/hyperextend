@@ -278,3 +278,19 @@ Extends `BaseResource`
   }
 }
 ```
+
+### `links`
+
+Array of Hyperextend `BaseLink` objects
+
+### `linkTemplates`
+
+Array of Hyperextend `TemplateLink` objects
+
+### `queries`
+
+Array of Hyperextend `Query` objects
+
+### `resources`
+
+Array of Hyperextend `FullResource` objects
