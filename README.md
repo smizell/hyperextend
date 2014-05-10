@@ -16,6 +16,7 @@ The base properties for any component.
     "classes": { "$ref": "http://hyperschema.org/core/base#h/definitions/classes" },
     "title": { "$ref": "http://hyperschema.org/core/base#/definitions/title" },
     "description": { "$ref": "http://hyperschema.org/core/base#/definitions/description" },
+    "version": { "$ref": "http://hyperschema.org/core/meta#/definitions/version" },
     "extends": {
       "title": "Extends URI",
       "description": "URI to JSON to extend",
@@ -285,19 +286,19 @@ Extends `BaseResource`
     "properties": { "$ref": "http://hyperschema.org/core/properties#/definitions/propertyObject" },
     "links": {
       "type": "array",
-      "item": { "$ref": "http://hyperschema.org/extend/hyperextend/link#/definitions/link" }
+      "item": { "$ref": "http://hyperschema.org/extend/hyperextend/link#" }
     },
     "linkTemplates": {
       "type": "array",
-      "item": { "$ref": "http://hyperschema.org/extend/hyperextend/linkTemplate#/definitions/linkTemplate" }
+      "item": { "$ref": "http://hyperschema.org/extend/hyperextend/linkTemplate#" }
     },
     "queries": {
       "type": "array",
-      "item": { "$ref": "http://hyperschema.org/extend/hyperextend/query#/definitions/query" }
+      "item": { "$ref": "http://hyperschema.org/extend/hyperextend/query#" }
     },
     "resources": {
       "type": "array",
-      "item": { "$ref": "http://hyperschema.org/extend/hyperextend/resource#/definitions/resource" }
+      "item": { "$ref": "http://hyperschema.org/extend/hyperextend/resource#" }
     }
   }
 }
@@ -318,3 +319,25 @@ Array of Hyperextend `Query` objects
 ### `resources`
 
 Array of Hyperextend `FullResource` objects
+
+## Hyperextend
+
+```json
+{
+  "type": "object",
+  "properities": {
+    "hyperextend": {
+      "oneOf": [
+        { "$ref": "http://hyperschema.org/extend/hyperextend/link#" },
+        { "$ref": "http://hyperschema.org/extend/hyperextend/templatedLink#" },
+        { "$ref": "http://hyperschema.org/extend/hyperextend/query#" },
+        { "$ref": "http://hyperschema.org/extend/hyperextend/resource#" }
+      ]
+    }
+  }
+}
+```
+
+### `hyperextend`
+
+Main hyperextend object, which can be a link, templated link, query, or resource
