@@ -1,12 +1,16 @@
 # Hyperextend
 
+Hyperextend is a library of components for extending media types. 
+
 ## Base
+
+The base properties for any component.
 
 ```json
 {
   "definitions": {
     "id": { "$ref": "http://hyperschema.org/core/base#/definitions/id" },
-    "classes": { "$ref": "http://hyperschema.org/core/base#/definitions/classes" },
+    "classes": { "$ref": "http://hyperschema.org/core/base#h/definitions/classes" },
     "title": { "$ref": "http://hyperschema.org/core/base#/definitions/title" },
     "description": { "$ref": "http://hyperschema.org/core/base#/definitions/description" },
     "extends": {
@@ -129,7 +133,7 @@ Extends `BaseLink`
       "type": "array",
       "items": { "$ref": "#/definitions/param" },
     }
-    "param": { "$ref": "http://hyperschema.org/extend/hyperextend#/definitions/field" }
+    "param": { "$ref": "http://hyperschema.org/extend/hyperextend/field#/definitions/field" }
   }
 }
 ```
@@ -159,7 +163,7 @@ Extends `BaseLink`
       "type": "array",
       "items": { "$ref": "#/definitions/param" }
     },
-    "param": { "$ref": "http://hyperschema.org/extend/hyperextend#/definitions/field" }
+    "param": { "$ref": "http://hyperschema.org/extend/hyperextend/field#/definitions/field" }
   }
 }
 ```
@@ -201,7 +205,7 @@ Extends `BaseLink`
         "mediaType": { "$ref": "http://hyperschema.org/core/link#/definitions/mediaType" },
         "fields": {
           "type": "array",
-          "items": { "$ref": "http://hyperschema.org/extend/hyperextend#/definitions/field" }
+          "items": { "$ref": "http://hyperschema.org/extend/hyperextend/field#/definitions/field" }
         },
         "jsonSchema": { "$ref": "http://hyperschema.org/core/meta#/definitions/jsonSchema" }
       }
