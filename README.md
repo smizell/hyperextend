@@ -15,7 +15,7 @@ The base properties for any component.
     "description": { "$ref": "http://hyperschema.org/core/base#/definitions/description" },
     "extends": {
       "title": "Extends URI",
-      "description": "URI to schema to extend",
+      "description": "URI to JSON to extend",
       "type": "string"
     }
   }
