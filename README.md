@@ -8,7 +8,10 @@ The base properties for any component.
 
 ```json
 {
-  "definitions": {
+  "title": "Base",
+  "description": "The base object for Hyperextend"
+  "type": "object",
+  "properties": {
     "id": { "$ref": "http://hyperschema.org/core/base#/definitions/id" },
     "classes": { "$ref": "http://hyperschema.org/core/base#h/definitions/classes" },
     "title": { "$ref": "http://hyperschema.org/core/base#/definitions/title" },
@@ -48,22 +51,23 @@ Extends `Base`
 
 ```json
 {
-  "definitions": {
+  "properties": {
     "prefixes": {
       "type": "array",
       "items": { "$ref": "#/definitions/prefix" }
     },
+    "rels": { "$ref": "http://hyperschema.org/core/link#/definitions/rels" },
+    "responseTypes": { "$ref": "http://hyperschema.org/core/link#/definitions/mediaTypes" },
+    "availableMethods": { "$ref": "http://hyperschema.org/protocols/http#/definitions/methods" },
+    "embedAs": { "type": "string" }
+  },
+  "definitions": {
     "prefix": { 
       "properties": {
         "prefix": { "$ref": "http://hyperschema.org/core/base#/definitions/prefix" },
         "href": { "$ref": "http://hyperschema.org/core/link#/definitions/href" }
       }
-    },
-    "rels": { "$ref": "http://hyperschema.org/core/link#/definitions/rels" },
-    "href": { "$ref": "http://hyperschema.org/core/link#/definitions/href" },
-    "responseTypes": { "$ref": "http://hyperschema.org/core/link#/definitions/mediaTypes" },
-    "availableMethods": { "$ref": "http://hyperschema.org/protocols/http#/definitions/methods" },
-    "embedAs": { "type": "string" }
+    }
   }
 }
 ```
@@ -83,10 +87,6 @@ Prefix for use with curies
 
 Array of link relations. REQUIRED
 
-### `href`
-
-URL for resource/link. REQUIRED
-
 ### `responseTypes`
 
 Available media types that represent resource on server
@@ -105,21 +105,19 @@ Extends `Base`
 
 ```json
 {
-  "definitions": {
-    "field": {
-      "properties": {
-        "name": { "$ref": "http://hyperschema.org/core/fields#/definitions/name" },
-        "defaultValue": { "$ref": "http://hyperschema.org/core/fields#/definitions/value" },
-        "currentValue": { "$ref": "http://hyperschema.org/core/fields#/definitions/value" },
-        "options": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/option" }
-        },
-        "type": { "$ref": "http://hyperschema.org/mediatypes/html#/definitions/type" },
-        "label" { "$ref": "http://hyperschema.org/core/fields#/definitions/label" },
-        "mapsTo": { "$ref": "http://hyperschema.org/core/fields#/definitions/mapsTo" }
-      }
+  "properties": {
+    "name": { "$ref": "http://hyperschema.org/core/fields#/definitions/name" },
+    "defaultValue": { "$ref": "http://hyperschema.org/core/fields#/definitions/value" },
+    "currentValue": { "$ref": "http://hyperschema.org/core/fields#/definitions/value" },
+    "options": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/option" }
     },
+    "type": { "$ref": "http://hyperschema.org/mediatypes/html#/definitions/type" },
+    "label" { "$ref": "http://hyperschema.org/core/fields#/definitions/label" },
+    "mapsTo": { "$ref": "http://hyperschema.org/core/fields#/definitions/mapsTo" }
+  },
+  "definitions": {
     "option": {
       "properties": {
         "name": { "$ref": "http://hyperschema.org/core/fields#/definitions/name" },
@@ -130,19 +128,34 @@ Extends `Base`
 }
 ```
 
+## Link
+
+Extends `BaseLink`
+
+```json
+{
+  "properties": {
+    "href": { "$ref": "http://hyperschema.org/core/link#/definitions/href" }
+  }
+}
+```
+
+### `href`
+
+URL for resource/link. REQUIRED
+
 ## TemplatedLink
 
 Extends `BaseLink`
 
 ```json
 {
-  "definitions": {
+  "properties": {
     "hreft": { "$ref": "http://hyperschema.org/core/link#/definitions/hrefTemplated" },
     "params": { 
       "type": "array",
-      "items": { "$ref": "#/definitions/param" }
-    },
-    "param": { "$ref": "http://hyperschema.org/extend/hyperextend/field#/definitions/field" }
+      "items": { "$ref": "http://hyperschema.org/extend/hyperextend/field# }
+    }
   }
 }
 ```
@@ -155,24 +168,19 @@ URI template according to RFC 6570.
 
 Array of parameters for template
 
-### `param`
-
-Describes available paramaters in template
-
 ## Query
+
+Extends `Link` or `TemplatedLink`
 
 Analogous with HTML form with method set to `GET`.
 
-Extends `BaseLink`
-
 ```json
 {
-  "definitions": {
+  "properties": {
     "queryParams": {
       "type": "array",
-      "items": { "$ref": "#/definitions/param" }
-    },
-    "param": { "$ref": "http://hyperschema.org/extend/hyperextend/field#/definitions/field" }
+      "items": { "$ref": "http://hyperschema.org/extend/hyperextend/field#" }
+    } 
   }
 }
 ```
@@ -181,17 +189,13 @@ Extends `BaseLink`
 
 Array of query parameters
 
-### `param`
-
-Query param
-
 ## BaseResource
 
-Extends `BaseLink`
+Extends `Link`
 
 ```json
 {
-  "definitions": {
+  "properties": {
     "semantics": {
       "type": "array",
       "items": { "$ref": "#/definitions/semantic" }
@@ -209,13 +213,15 @@ Extends `BaseLink`
     "templates": {
       "type": "array",
       "items": { "$ref": "#/definitions/template" }
-    },
+    }
+  },
+  "definitions": {
     "template": {
       "properties": {
         "mediaType": { "$ref": "http://hyperschema.org/core/link#/definitions/mediaType" },
         "fields": {
           "type": "array",
-          "items": { "$ref": "http://hyperschema.org/extend/hyperextend/field#/definitions/field" }
+          "items": { "$ref": "http://hyperschema.org/extend/hyperextend/field#" }
         },
         "jsonSchema": { "$ref": "http://hyperschema.org/core/meta#/definitions/jsonSchema" }
       }
@@ -254,34 +260,28 @@ Template for different media type
 * `fields` - Specifies fields, if applicable
 * `jsonSchema` - Specifies JSON Schema, if applicable
 
-## Instance Schemeas
-
-These include data that is specific to instances
-
 ## FullResource
 
 Extends `BaseResource`
 
 ```json
 {
-  "definitions": {
-    "properties": {
-      "links": {
-        "type": "array",
-        "item": { "$ref": "http://hyperschema.org/extend/hyperextend/link#/definitions/link" }
-      },
-      "linkTemplates": {
-        "type": "array",
-        "item": { "$ref": "http://hyperschema.org/extend/hyperextend/linkTemplate#/definitions/linkTemplate" }
-      },
-      "queries": {
-        "type": "array",
-        "item": { "$ref": "http://hyperschema.org/extend/hyperextend/query#/definitions/query" }
-      },
-      "resources": {
-        "type": "array",
-        "item": { "$ref": "http://hyperschema.org/extend/hyperextend/resource#/definitions/resource" }
-      }
+  "properties": {
+    "links": {
+      "type": "array",
+      "item": { "$ref": "http://hyperschema.org/extend/hyperextend/link#/definitions/link" }
+    },
+    "linkTemplates": {
+      "type": "array",
+      "item": { "$ref": "http://hyperschema.org/extend/hyperextend/linkTemplate#/definitions/linkTemplate" }
+    },
+    "queries": {
+      "type": "array",
+      "item": { "$ref": "http://hyperschema.org/extend/hyperextend/query#/definitions/query" }
+    },
+    "resources": {
+      "type": "array",
+      "item": { "$ref": "http://hyperschema.org/extend/hyperextend/resource#/definitions/resource" }
     }
   }
 }
