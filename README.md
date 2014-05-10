@@ -174,7 +174,7 @@ Extends `BaseLink`
     "hreft": { "$ref": "http://hyperschema.org/core/link#/definitions/hrefTemplated" },
     "params": { 
       "type": "array",
-      "items": { "$ref": "http://hyperschema.org/extend/hyperextend/field# }
+      "items": { "$ref": "http://hyperschema.org/extend/hyperextend/field#" }
     }
   }
 }
