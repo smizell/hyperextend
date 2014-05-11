@@ -4,6 +4,7 @@ Hyperextend is a library of components for extending media types.
 
 **Status**: Draft  
 **Version**: 0.1.0
+**Proposed registration**: TBD
 
 ## Base
 
@@ -234,6 +235,8 @@ Extends `BaseTemplatedLink`
 ## Action
 
 Extends `BaseLink`
+
+This is the only link type that can have a different HTTP method.
 
 ```json
 {
