@@ -53,8 +53,6 @@ URI for schema to extend
 
 Extends `Base`
 
-A link is considered to be safe GET requests.
-
 ```json
 {
   "properties": {
@@ -153,6 +151,8 @@ The current value of the field
 
 Extends `BaseLink`
 
+A link is considered to be safe GET requests.
+
 ```json
 {
   "properties": {
@@ -165,7 +165,7 @@ Extends `BaseLink`
 
 URL for resource/link. REQUIRED
 
-## TemplatedLink
+## BaseTemplatedLink
 
 Extends `BaseLink`
 
@@ -173,7 +173,7 @@ Extends `BaseLink`
 {
   "properties": {
     "hreft": { "$ref": "http://hyperschema.org/core/link#/definitions/hrefTemplated" },
-    "params": { 
+    "uriParams": { 
       "type": "array",
       "items": { "$ref": "http://hyperschema.org/extend/hyperextend/field#" }
     }
@@ -185,13 +185,19 @@ Extends `BaseLink`
 
 URI template according to RFC 6570.
 
-### `params`
+### `uriParams`
 
 Array of parameters for template
 
+## TemplatedLink
+
+Extends `BaseTemplatedLink`
+
+Should be a `GET` method.
+
 ## Query
 
-Extends `Link` or `TemplatedLink`
+Extends `Link`
 
 Analogous with HTML form with method set to `GET`.
 
@@ -209,6 +215,43 @@ Analogous with HTML form with method set to `GET`.
 ### `queryParams`
 
 Array of query parameters
+
+## TemplatedQuery
+
+Extends `BaseTemplatedLink`
+
+```json
+{
+  "properties": {
+    "queryParams": {
+      "type": "array",
+      "items": { "$ref": "http://hyperschema.org/extend/hyperextend/field#" }
+    } 
+  }
+}
+```
+
+## Action
+
+Extends `BaseLink`
+
+```json
+{
+  "properties": {
+    "method": { "$ref": "http://hyperschema.org/protocols/http#/definitions/method" },
+    "bodyParams": {
+      "type": "array",
+      "items": { "$ref": "http://hyperschema.org/extend/hyperextend/field#" }
+    } 
+  }
+}
+```
+
+## TemplatedAction
+
+Extends `Action` and `BaseTemplatedLink`
+
+A way to have a URI template and Action in the same object.
 
 ## BaseResource
 
@@ -301,6 +344,10 @@ Extends `BaseResource`
       "type": "array",
       "item": { "$ref": "http://hyperschema.org/extend/hyperextend/query#" }
     },
+    "actions": {
+      "type": "array",
+      "item": { "$ref": "http://hyperschema.org/extend/hyperextend/action#" }
+    },
     "resources": {
       "type": "array",
       "item": { "$ref": "http://hyperschema.org/extend/hyperextend/resource#" }
@@ -336,7 +383,8 @@ Array of Hyperextend `FullResource` objects
         { "$ref": "http://hyperschema.org/extend/hyperextend/link#" },
         { "$ref": "http://hyperschema.org/extend/hyperextend/templatedLink#" },
         { "$ref": "http://hyperschema.org/extend/hyperextend/query#" },
-        { "$ref": "http://hyperschema.org/extend/hyperextend/resource#" }
+        { "$ref": "http://hyperschema.org/extend/hyperextend/resource#" },
+        { "$ref": "http://hyperschema.org/extend/hyperextend/action#" }
       ]
     }
   }
