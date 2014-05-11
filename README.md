@@ -53,6 +53,8 @@ URI for schema to extend
 
 Extends `Base`
 
+A link is considered to be safe GET requests.
+
 ```json
 {
   "properties": {
@@ -62,7 +64,6 @@ Extends `Base`
     },
     "rels": { "$ref": "http://hyperschema.org/core/link#/definitions/rels" },
     "responseTypes": { "$ref": "http://hyperschema.org/core/link#/definitions/mediaTypes" },
-    "availableMethods": { "$ref": "http://hyperschema.org/protocols/http#/definitions/methods" },
     "embedAs": { "type": "string" }
   },
   "definitions": {
@@ -229,6 +230,7 @@ Extends `Link`
         "label": { "$ref": "http://hyperschema.org/core/properties#/definitions/label" }
       }
     },
+    "availableMethods": { "$ref": "http://hyperschema.org/protocols/http#/definitions/methods" },
     "templates": {
       "type": "array",
       "items": { "$ref": "#/definitions/template" }
