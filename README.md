@@ -89,7 +89,7 @@ Prefix for use with curies
 
 ### `rels`
 
-Array of link relations. REQUIRED
+Array of link relations.
 
 ### `responseTypes`
 
@@ -103,7 +103,7 @@ Available HTTP methods for resource/link
 
 Instructs client on how to embed the resource/link (TBD)
 
-## BaseField
+## Field
 
 Extends `Base`
 
@@ -113,33 +113,10 @@ Extends `Base`
     "name": { "$ref": "http://hyperschema.org/core/fields#/definitions/name" },
     "defaultValue": { "$ref": "http://hyperschema.org/core/fields#/definitions/value" },
     "currentValue": { "$ref": "http://hyperschema.org/core/fields#/definitions/value" },
-    "options": {
-      "type": "array",
-      "items": { "$ref": "#/definitions/option" }
-    },
+    "options": { "$ref": "http://hyperschema.org/core/fields#/definitions/options" },
     "type": { "$ref": "http://hyperschema.org/mediatypes/html#/definitions/type" },
-    "label" { "$ref": "http://hyperschema.org/core/fields#/definitions/label" },
+    "label": { "$ref": "http://hyperschema.org/core/fields#/definitions/label" },
     "mapsTo": { "$ref": "http://hyperschema.org/core/fields#/definitions/mapsTo" }
-  },
-  "definitions": {
-    "option": {
-      "properties": {
-        "name": { "$ref": "http://hyperschema.org/core/fields#/definitions/name" },
-        "value": { "$ref": "http://hyperschema.org/core/fields#/definitions/value" }
-      }
-    }
-  }
-}
-```
-
-## Field
-
-Extends `BaseField`
-
-```json
-{
-  "properties": {
-    "currentValue": { "$ref": "http://hyperschema.org/core/fields#/definitions/value" },
   }
 }
 ```
@@ -164,7 +141,7 @@ A link is considered to be safe GET requests.
 
 ### `href`
 
-URL for resource/link. REQUIRED
+URL for resource/link.
 
 ## BaseTemplatedLink
 
@@ -256,36 +233,66 @@ Extends `Action` and `BaseTemplatedLink`
 
 A way to have a URI template and Action in the same object.
 
-## BaseResource
+## Semantic
 
-Extends `Link`
+Extends `Base`
+
+A semantic is a way to define semantics for properties
 
 ```json
 {
   "properties": {
-    "semantics": {
-      "type": "array",
-      "items": { "$ref": "#/definitions/semantic" }
-    },
     "semantic": {
+      "type": "object",
       "properties": {
         "name": { "$ref": "http://hyperschema.org/core/properties#/definitions/name" },
-        "type": { "$ref": "http://hyperschema.org/mediatypes/html#/definitions/type" },
+        "type": { "$ref": "http://hyperschema.org/core/meta#/definitions/jsonType" }
+        "format": { "$ref": "http://hyperschema.org/mediatypes/html#/definitions/type" },
         "value": { "$ref": "http://hyperschema.org/core/properties#/definitions/value" },
         "typeOf": { "$ref": "http://hyperschema.org/core/meta#/definitions/typeOf" },
         "label": { "$ref": "http://hyperschema.org/core/properties#/definitions/label" }
       }
-    },
-    "availableMethods": { "$ref": "http://hyperschema.org/protocols/http#/definitions/methods" },
-    "templates": {
-      "type": "array",
-      "items": { "$ref": "#/definitions/template" }
     }
-  },
-  "definitions": {
+  }
+}
+```
+
+### `name`
+
+Name of the property
+
+### `type`
+
+Type of the property (JSON types)
+
+### `format`
+
+Format for the property (HTML.input types)
+
+### `value`
+
+Value of the property
+
+### `typeOf`
+
+Type of the property (e.g. Schema.org)
+
+### `label`
+
+Human-readable label of the property
+
+## Template
+
+Extends `Base`
+
+A template is way to provide a resource template.
+
+```json
+{
+  "properties": {
     "template": {
       "properties": {
-        "mediaType": { "$ref": "http://hyperschema.org/core/link#/definitions/mediaType" },
+        "mediaTypes": { "$ref": "http://hyperschema.org/core/link#/definitions/mediaTypes" },
         "fields": {
           "type": "array",
           "items": { "$ref": "http://hyperschema.org/extend/hyperextend/field#" }
@@ -297,103 +304,15 @@ Extends `Link`
 }
 ```
 
-### `semantics`
+### `mediaTypes`
 
-Array of `semantic` objects
+Array of possible media types to use with the template
 
-### `semantic`
+### `fields`
 
-Semantic for properity
+Array of Hyperextend `Field` objects
 
-* `name`
-* `type`
-* `value`
-* `typeOf`
-* `label`
+### `jsonSchema`
 
-### Properties
+A JSON Schema object to define the schema of a possible JSON body.
 
-Properites of resource
-
-### `templates`
-
-Array of template objects
-
-### `template`
-
-Template for different media type
-
-* `mediaType` - Specifies the media type
-* `fields` - Specifies fields, if applicable
-* `jsonSchema` - Specifies JSON Schema, if applicable
-
-## Resource
-
-Extends `BaseResource`
-
-```json
-{
-  "properties": {
-    "properties": { "$ref": "http://hyperschema.org/core/properties#/definitions/propertyObject" },
-    "links": {
-      "type": "array",
-      "item": { "$ref": "http://hyperschema.org/extend/hyperextend/link#" }
-    },
-    "linkTemplates": {
-      "type": "array",
-      "item": { "$ref": "http://hyperschema.org/extend/hyperextend/linkTemplate#" }
-    },
-    "queries": {
-      "type": "array",
-      "item": { "$ref": "http://hyperschema.org/extend/hyperextend/query#" }
-    },
-    "actions": {
-      "type": "array",
-      "item": { "$ref": "http://hyperschema.org/extend/hyperextend/action#" }
-    },
-    "resources": {
-      "type": "array",
-      "item": { "$ref": "http://hyperschema.org/extend/hyperextend/resource#" }
-    }
-  }
-}
-```
-
-### `links`
-
-Array of Hyperextend `BaseLink` objects
-
-### `linkTemplates`
-
-Array of Hyperextend `TemplateLink` objects
-
-### `queries`
-
-Array of Hyperextend `Query` objects
-
-### `resources`
-
-Array of Hyperextend `FullResource` objects
-
-## Hyperextend
-
-```json
-{
-  "type": "object",
-  "properities": {
-    "hyperextend": {
-      "oneOf": [
-        { "$ref": "http://hyperschema.org/extend/hyperextend/link#" },
-        { "$ref": "http://hyperschema.org/extend/hyperextend/templatedLink#" },
-        { "$ref": "http://hyperschema.org/extend/hyperextend/query#" },
-        { "$ref": "http://hyperschema.org/extend/hyperextend/resource#" },
-        { "$ref": "http://hyperschema.org/extend/hyperextend/action#" }
-      ]
-    }
-  }
-}
-```
-
-### `hyperextend`
-
-Main hyperextend object, which can be a link, templated link, query, or resource
