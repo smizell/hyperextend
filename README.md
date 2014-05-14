@@ -187,23 +187,16 @@ URI template according to RFC 6570.
 
 Array of parameters for template
 
-## Query
-
-Extends `Link`
+## BaseQuery
 
 ```json
 {
-  "allOf": [
-    { "$ref": "http://hyperschema.org/extend/hyperextend/link#" },
-    {
-      "properties": {
-        "queryParams": {
-          "type": "array",
-          "items": { "$ref": "http://hyperschema.org/extend/hyperextend/field#" }
-        } 
-      }
-    }
-  ]
+  "properties": {
+    "queryParams": {
+      "type": "array",
+      "items": { "$ref": "http://hyperschema.org/extend/hyperextend/field#" }
+    } 
+  }
 }
 ```
 
@@ -211,22 +204,28 @@ Extends `Link`
 
 Array of query parameters
 
+## Query
+
+Extends `Link` and `BaseQuery`
+
+```json
+{
+  "allOf": [
+    { "$ref": "http://hyperschema.org/extend/hyperextend/link#" },
+    { "$ref": "http://hyperschema.org/extend/hyperextend/basequery#" }
+  ]
+}
+```
+
 ## TemplatedQuery
 
-Extends `TemplatedLink`
+Extends `TemplatedLink` and `BaseQuery`
 
 ```json
 {
   "allOf": [
     { "$ref": "http://hyperschema.org/extend/hyperextend/templatedlink#" },
-    {
-      "properties": {
-        "queryParams": {
-          "type": "array",
-          "items": { "$ref": "http://hyperschema.org/extend/hyperextend/field#" }
-        } 
-      }
-    }
+    { "$ref": "http://hyperschema.org/extend/hyperextend/basequery#" }
   ]
 }
 ```
