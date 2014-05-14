@@ -28,26 +28,38 @@ The base properties for any component.
   }
 }
 ```
+### Properties
 
-### `id`
+#### `id`
 
 Unique identifier
 
-### `classes`
+#### `classes`
 
 Classifier for a resource to give name or type
 
-### `title`
+#### `title`
 
 Human-readable title
 
-### `description`
+#### `description`
 
 Human-readable description
 
-### `extends`
+#### `extends`
 
 URI for schema to extend
+
+## Example
+
+```json
+{
+  "id": "customer-34",
+  "classes": [ "customer" ],
+  "title": "Customer",
+  "description": "Customer from CRM System"
+}
+```
 
 ## BaseLink
 
@@ -65,6 +77,7 @@ Extends `Base`
         },
         "rels": { "$ref": "http://hyperschema.org/core/link#/definitions/rels" },
         "responseTypes": { "$ref": "http://hyperschema.org/core/link#/definitions/mediaTypes" },
+        "typeOf": { "$ref": "http://hyperschema.org/core/meta#/definitions/typeOf" },
         "embedAs": { "type": "string" }
       },
       "definitions": {
@@ -80,32 +93,55 @@ Extends `Base`
 }
 ```
 
-### `prefixes`
+### Properties
+
+#### `prefixes`
 
 Array of `prefix` objects
 
-### `prefix`
+#### `prefix`
 
 Prefix for use with curies
 
 * `prefix` - Prefix (e.g. schema)
 * `href` - URL (e.g. http://schema.org)
 
-### `rels`
+#### `rels`
 
 Array of link relations.
 
-### `responseTypes`
+#### `responseTypes`
 
 Available media types that represent resource on server
 
-### `availableMethods`
+#### `availableMethods`
 
 Available HTTP methods for resource/link
 
-### `embedAs`
+### `typeOf`
+
+Type of the property (e.g. Schema.org)
+
+#### `embedAs`
 
 Instructs client on how to embed the resource/link (TBD)
+
+### Example
+
+```json
+{
+  "prefixes": [
+    { "prefix": "schema", "href": "http://schema.org"}
+  ],
+  "rels": [ "item", "http://example.com/rels/customer"],
+  "responseTypes": [
+    "image/jpg",
+    "image/gif"
+  ],
+  "typeOf": "schema:Person#image",
+  "embedAs": "image"
+}
+```
 
 ## Field
 
@@ -120,8 +156,10 @@ Extends `Base`
         "name": { "$ref": "http://hyperschema.org/core/fields#/definitions/name" },
         "defaultValue": { "$ref": "http://hyperschema.org/core/fields#/definitions/value" },
         "currentValue": { "$ref": "http://hyperschema.org/core/fields#/definitions/value" },
+        "value": { "$ref": "http://hyperschema.org/core/fields#/definitions/value" },
         "options": { "$ref": "http://hyperschema.org/core/fields#/definitions/options" },
         "type": { "$ref": "http://hyperschema.org/mediatypes/html#/definitions/type" },
+        "format": { "$ref": "http://hyperschema.org/mediatypes/html#/definitions/type" },
         "label": { "$ref": "http://hyperschema.org/core/fields#/definitions/label" },
         "mapsTo": { "$ref": "http://hyperschema.org/core/fields#/definitions/mapsTo" }
       }
@@ -130,9 +168,63 @@ Extends `Base`
 }
 ```
 
-### `currentValue`
+### Properties
 
-The current value of the field
+#### `name`
+
+Name of field
+
+#### `defaultValue`
+
+Default value of field
+
+#### `currentValue`
+
+The current value of the field (usually returned from the server)
+
+#### `value`
+
+The value of the field (usually being sent to the server)
+
+#### `options`
+
+Field options (similar to select tag in HTML with options)
+
+#### `type`
+
+The type of the field from available JSON types
+
+#### `format`
+
+Format of field (from HTML types)
+
+#### `label`
+
+Human-readable label
+
+#### `mapsTo`
+
+Property to which this field corresponds
+
+### Example
+
+More examples below where this is used.
+
+```json
+{
+  "name": "color",
+  "defaultValue": "blue",
+  "currentValue": "red",
+  "options": [
+    { "name": "Red", "value": "red" },
+    { "name": "Blue", "value": "blue" },
+    { "name": "Green", "value": "green" }
+  ],
+  "type": "string",
+  "label": "Color",
+  "mapsTo": "color-property"
+}
+```
 
 ## Link
 
@@ -153,9 +245,31 @@ A link is considered to be safe GET requests.
 }
 ```
 
-### `href`
+### Properties
+
+#### `href`
 
 URL for resource/link.
+
+### Example
+
+```json
+{
+  "id": "customer-4",
+  "classes": [ "customer" ],
+  "prefixes": [
+    { "prefix": "schema", "href": "http://schema.org"}
+  ],
+  "rels": [ "item", "http://example.com/rels/customer"],
+  "responseTypes": [
+    "image/jpg",
+    "image/gif"
+  ],
+  "typeOf": "schema:Person#image",
+  "href": "/customer/4/image"
+  "embedAs": "image"
+}
+```
 
 ## TemplatedLink
 
@@ -178,13 +292,44 @@ Extends `BaseLink`
 }
 ```
 
-### `hreft`
+### Properties
+
+#### `hreft`
 
 URI template according to RFC 6570.
 
-### `uriParams`
+#### `uriParams`
 
 Array of parameters for template
+
+### Example
+
+```json
+{
+  "id": "customer-4",
+  "classes": [ "customer" ],
+  "title": "Customer Picture",
+  "prefixes": [
+    { "prefix": "schema", "href": "http://schema.org"}
+  ],
+  "rels": [ "item", "http://example.com/rels/customer"],
+  "responseTypes": [
+    "image/jpg",
+    "image/gif"
+  ],
+  "typeOf": "schema:Person#image",
+  "hreft": "/customer/{id}/image"
+  "embedAs": "image",
+  "uriParams": [
+    {
+      "name": "id",
+      "type": "number",
+      "label": "Customer ID",
+      "mapsTo": "id"
+    }
+  ]
+}
+```
 
 ## BaseQuery
 
@@ -199,7 +344,9 @@ Array of parameters for template
 }
 ```
 
-### `queryParams`
+### Properties
+
+#### `queryParams`
 
 Array of query parameters
 
@@ -216,6 +363,30 @@ Extends `Link` and `BaseQuery`
 }
 ```
 
+### Example
+
+```json
+{
+  "id": "customer-4",
+  "classes": [ "customer" ],
+  "title": "Customer Picture",
+  "rels": [ "item", "http://example.com/rels/customer-images"],
+  "responseTypes": [
+    "image/jpg",
+    "image/gif"
+  ],
+  "hreft": "/customer_images",
+  "queryParams": [
+    {
+      "name": "id",
+      "type": "number",
+      "label": "Customer ID",
+      "mapsTo": "id"
+    }
+  ]
+}
+```
+
 ## TemplatedQuery
 
 Extends `TemplatedLink` and `BaseQuery`
@@ -225,6 +396,37 @@ Extends `TemplatedLink` and `BaseQuery`
   "allOf": [
     { "$ref": "http://hyperschema.org/extend/hyperextend/templatedlink#" },
     { "$ref": "http://hyperschema.org/extend/hyperextend/basequery#" }
+  ]
+}
+```
+
+### Example
+
+```json
+{
+  "id": "customer-4",
+  "classes": [ "customer" ],
+  "title": "Customer Images",
+  "rels": [ "item", "http://example.com/rels/customer-images"],
+  "responseTypes": [
+    "image/jpg",
+    "image/gif"
+  ],
+  "hreft": "/customer/{id}/images",
+  "uriParams": [
+    {
+      "name": "id",
+      "type": "number",
+      "label": "Customer ID",
+      "mapsTo": "id"
+    }
+  ],
+  "queryParams": [
+    {
+      "name": "location",
+      "type": "string",
+      "label": "Image Location"
+    }
   ]
 }
 ```
@@ -258,6 +460,29 @@ Extends `Link` and `BaseAction`
 }
 ```
 
+### Example
+
+```json
+{
+  "title": "Create Customer",
+  "rels": [ "http://example.com/rels/customers"],
+  "href": "/customers",
+  "method": "POST",
+  "bodyParams": [
+    {
+      "name": "first_name",
+      "type": "string",
+      "label": "First Name"
+    },
+    {
+      "name": "last_name",
+      "type": "string",
+      "label": "Last Name"
+    }
+  ]
+}
+```
+
 ## TemplatedAction
 
 Extends `TemplatedLink` and `BaseAction`
@@ -269,6 +494,36 @@ A way to have a URI template and Action in the same object.
   "allOf": [
     { "$ref": "http://hyperschema.org/extend/hyperextend/templatedlink#" },
     { "$ref": "http://hyperschema.org/extend/hyperextend/baseaction#" }
+  ]
+}
+```
+
+### Example
+
+```json
+{
+  "title": "Edit Customer",
+  "rels": [ "http://example.com/rels/customers"],
+  "hreft": "/customers/{id}",
+  "method": "POST",
+  "uriParams": [
+    {
+      "name": "id",
+      "type": "number",
+      "mapsTo": "id"
+    }
+  ],
+  "bodyParams": [
+    {
+      "name": "first_name",
+      "type": "string",
+      "label": "First Name"
+    },
+    {
+      "name": "last_name",
+      "type": "string",
+      "label": "Last Name"
+    }
   ]
 }
 ```
@@ -302,29 +557,43 @@ A semantic is a way to define semantics for properties
 }
 ```
 
-### `name`
+### Properties
+
+#### `name`
 
 Name of the property
 
-### `type`
+#### `type`
 
 Type of the property (JSON types)
 
-### `format`
+#### `format`
 
 Format for the property (HTML.input types)
 
-### `value`
+#### `value`
 
 Value of the property
 
-### `typeOf`
+#### `typeOf`
 
 Type of the property (e.g. Schema.org)
 
-### `label`
+#### `label`
 
 Human-readable label of the property
+
+### Example
+
+```json
+{
+  "name": "email",
+  "type": "string",
+  "format": "email",
+  "value": "john@doe.com",
+  "label": "Email"
+}
+```
 
 ## Resource Template
 
@@ -338,31 +607,48 @@ A resource template for adding and updating a resource.
     { "$ref": "http://hyperschema.org/extend/hyperextend/base#" },
     {
       "properties": {
-        "template": {
-          "properties": {
-            "mediaTypes": { "$ref": "http://hyperschema.org/core/link#/definitions/mediaTypes" },
-            "fields": {
-              "type": "array",
-              "items": { "$ref": "http://hyperschema.org/extend/hyperextend/field#" }
-            },
-            "jsonSchema": { "$ref": "http://hyperschema.org/core/meta#/definitions/jsonSchema" }
-          }
-        }
+        "mediaTypes": { "$ref": "http://hyperschema.org/core/link#/definitions/mediaTypes" },
+        "fields": {
+          "type": "array",
+          "items": { "$ref": "http://hyperschema.org/extend/hyperextend/field#" }
+        },
+        "jsonSchema": { "$ref": "http://hyperschema.org/core/meta#/definitions/jsonSchema" }
       }
     }
   ]
 }
 ```
+### Properties
 
-### `mediaTypes`
+#### `mediaTypes`
 
 Array of possible media types to use with the template
 
-### `fields`
+#### `fields`
 
 Array of Hyperextend `Field` objects
 
-### `jsonSchema`
+#### `jsonSchema`
 
 A JSON Schema object to define the schema of a possible JSON body.
+
+### Example
+
+```json
+{
+  "mediaTypes": [ "application/x-www-form-urlencoded" ],
+  "fields": [
+    {
+      "name": "first_name",
+      "type": "string",
+      "label": "First Name"
+    },
+    {
+      "name": "last_name",
+      "type": "string",
+      "label": "Last Name"
+    }
+  ]
+}
+```
 
