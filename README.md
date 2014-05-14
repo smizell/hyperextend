@@ -56,23 +56,28 @@ Extends `Base`
 
 ```json
 {
-  "properties": {
-    "prefixes": {
-      "type": "array",
-      "items": { "$ref": "#/definitions/prefix" }
-    },
-    "rels": { "$ref": "http://hyperschema.org/core/link#/definitions/rels" },
-    "responseTypes": { "$ref": "http://hyperschema.org/core/link#/definitions/mediaTypes" },
-    "embedAs": { "type": "string" }
-  },
-  "definitions": {
-    "prefix": { 
+  "allOf": [
+    { "$ref": "http://hyperschema.org/extend/hyperextend/base#" },
+    {
       "properties": {
-        "prefix": { "$ref": "http://hyperschema.org/core/base#/definitions/prefix" },
-        "href": { "$ref": "http://hyperschema.org/core/link#/definitions/href" }
+        "prefixes": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/prefix" }
+        },
+        "rels": { "$ref": "http://hyperschema.org/core/link#/definitions/rels" },
+        "responseTypes": { "$ref": "http://hyperschema.org/core/link#/definitions/mediaTypes" },
+        "embedAs": { "type": "string" }
+      },
+      "definitions": {
+        "prefix": { 
+          "properties": {
+            "prefix": { "$ref": "http://hyperschema.org/core/base#/definitions/prefix" },
+            "href": { "$ref": "http://hyperschema.org/core/link#/definitions/href" }
+          }
+        }
       }
     }
-  }
+  ]
 }
 ```
 
@@ -109,15 +114,20 @@ Extends `Base`
 
 ```json
 {
-  "properties": {
-    "name": { "$ref": "http://hyperschema.org/core/fields#/definitions/name" },
-    "defaultValue": { "$ref": "http://hyperschema.org/core/fields#/definitions/value" },
-    "currentValue": { "$ref": "http://hyperschema.org/core/fields#/definitions/value" },
-    "options": { "$ref": "http://hyperschema.org/core/fields#/definitions/options" },
-    "type": { "$ref": "http://hyperschema.org/mediatypes/html#/definitions/type" },
-    "label": { "$ref": "http://hyperschema.org/core/fields#/definitions/label" },
-    "mapsTo": { "$ref": "http://hyperschema.org/core/fields#/definitions/mapsTo" }
-  }
+  "allOf": [
+    { "$ref": "http://hyperschema.org/extend/hyperextend/base#" },
+    {
+      "properties": {
+        "name": { "$ref": "http://hyperschema.org/core/fields#/definitions/name" },
+        "defaultValue": { "$ref": "http://hyperschema.org/core/fields#/definitions/value" },
+        "currentValue": { "$ref": "http://hyperschema.org/core/fields#/definitions/value" },
+        "options": { "$ref": "http://hyperschema.org/core/fields#/definitions/options" },
+        "type": { "$ref": "http://hyperschema.org/mediatypes/html#/definitions/type" },
+        "label": { "$ref": "http://hyperschema.org/core/fields#/definitions/label" },
+        "mapsTo": { "$ref": "http://hyperschema.org/core/fields#/definitions/mapsTo" }
+      }
+    }
+  ]
 }
 ```
 
@@ -133,9 +143,14 @@ A link is considered to be safe GET requests.
 
 ```json
 {
-  "properties": {
-    "href": { "$ref": "http://hyperschema.org/core/link#/definitions/href" }
-  }
+  "allOf": [
+    { "$ref": "http://hyperschema.org/extend/hyperextend/baselink#" },
+    {
+      "properties": {
+        "href": { "$ref": "http://hyperschema.org/core/link#/definitions/href" }
+      }
+    }
+  ]
 }
 ```
 
@@ -143,19 +158,24 @@ A link is considered to be safe GET requests.
 
 URL for resource/link.
 
-## BaseTemplatedLink
+## TemplatedLink
 
 Extends `BaseLink`
 
 ```json
 {
-  "properties": {
-    "hreft": { "$ref": "http://hyperschema.org/core/link#/definitions/hrefTemplated" },
-    "uriParams": { 
-      "type": "array",
-      "items": { "$ref": "http://hyperschema.org/extend/hyperextend/field#" }
+  "allOf": [
+    { "$ref": "http://hyperschema.org/extend/hyperextend/baselink#" },
+    {
+      "properties": {
+        "hreft": { "$ref": "http://hyperschema.org/core/link#/definitions/hrefTemplated" },
+        "uriParams": { 
+          "type": "array",
+          "items": { "$ref": "http://hyperschema.org/extend/hyperextend/field#" }
+        }
+      }
     }
-  }
+  ]
 }
 ```
 
@@ -167,26 +187,23 @@ URI template according to RFC 6570.
 
 Array of parameters for template
 
-## TemplatedLink
-
-Extends `BaseTemplatedLink`
-
-Should be a `GET` method.
-
 ## Query
 
 Extends `Link`
 
-Analogous with HTML form with method set to `GET`.
-
 ```json
 {
-  "properties": {
-    "queryParams": {
-      "type": "array",
-      "items": { "$ref": "http://hyperschema.org/extend/hyperextend/field#" }
-    } 
-  }
+  "allOf": [
+    { "$ref": "http://hyperschema.org/extend/hyperextend/link#" },
+    {
+      "properties": {
+        "queryParams": {
+          "type": "array",
+          "items": { "$ref": "http://hyperschema.org/extend/hyperextend/field#" }
+        } 
+      }
+    }
+  ]
 }
 ```
 
@@ -196,22 +213,25 @@ Array of query parameters
 
 ## TemplatedQuery
 
-Extends `BaseTemplatedLink`
+Extends `TemplatedLink`
 
 ```json
 {
-  "properties": {
-    "queryParams": {
-      "type": "array",
-      "items": { "$ref": "http://hyperschema.org/extend/hyperextend/field#" }
-    } 
-  }
+  "allOf": [
+    { "$ref": "http://hyperschema.org/extend/hyperextend/templatedlink#" },
+    {
+      "properties": {
+        "queryParams": {
+          "type": "array",
+          "items": { "$ref": "http://hyperschema.org/extend/hyperextend/field#" }
+        } 
+      }
+    }
+  ]
 }
 ```
 
-## Action
-
-Extends `BaseLink`
+## BaseAction
 
 This is the only link type that can have a different HTTP method.
 
@@ -227,11 +247,33 @@ This is the only link type that can have a different HTTP method.
 }
 ```
 
+## Action
+
+Extends `Link` and `BaseAction`
+
+```json
+{
+  "allOf": [
+    { "$ref": "http://hyperschema.org/extend/hyperextend/link#" },
+    { "$ref": "http://hyperschema.org/extend/hyperextend/baseaction#" }
+  ]
+}
+```
+
 ## TemplatedAction
 
-Extends `Action` and `BaseTemplatedLink`
+Extends `TemplatedLink` and `BaseAction`
 
 A way to have a URI template and Action in the same object.
+
+```json
+{
+  "allOf": [
+    { "$ref": "http://hyperschema.org/extend/hyperextend/templatedlink#" },
+    { "$ref": "http://hyperschema.org/extend/hyperextend/baseaction#" }
+  ]
+}
+```
 
 ## Semantic
 
@@ -241,19 +283,24 @@ A semantic is a way to define semantics for properties
 
 ```json
 {
-  "properties": {
-    "semantic": {
-      "type": "object",
+  "allOf": [
+    { "$ref": "http://hyperschema.org/extend/hyperextend/base#" },
+    {
       "properties": {
-        "name": { "$ref": "http://hyperschema.org/core/properties#/definitions/name" },
-        "type": { "$ref": "http://hyperschema.org/core/meta#/definitions/jsonType" }
-        "format": { "$ref": "http://hyperschema.org/mediatypes/html#/definitions/type" },
-        "value": { "$ref": "http://hyperschema.org/core/properties#/definitions/value" },
-        "typeOf": { "$ref": "http://hyperschema.org/core/meta#/definitions/typeOf" },
-        "label": { "$ref": "http://hyperschema.org/core/properties#/definitions/label" }
+        "semantic": {
+          "type": "object",
+          "properties": {
+            "name": { "$ref": "http://hyperschema.org/core/properties#/definitions/name" },
+            "type": { "$ref": "http://hyperschema.org/core/meta#/definitions/jsonType" },
+            "format": { "$ref": "http://hyperschema.org/mediatypes/html#/definitions/type" },
+            "value": { "$ref": "http://hyperschema.org/core/properties#/definitions/value" },
+            "typeOf": { "$ref": "http://hyperschema.org/core/meta#/definitions/typeOf" },
+            "label": { "$ref": "http://hyperschema.org/core/properties#/definitions/label" }
+          }
+        }
       }
     }
-  }
+  ]
 }
 ```
 
@@ -281,26 +328,31 @@ Type of the property (e.g. Schema.org)
 
 Human-readable label of the property
 
-## Template
+## Resource Template
 
 Extends `Base`
 
-A template is way to provide a resource template.
+A resource template for adding and updating a resource.
 
 ```json
 {
-  "properties": {
-    "template": {
+  "allOf": [
+    { "$ref": "http://hyperschema.org/extend/hyperextend/base#" },
+    {
       "properties": {
-        "mediaTypes": { "$ref": "http://hyperschema.org/core/link#/definitions/mediaTypes" },
-        "fields": {
-          "type": "array",
-          "items": { "$ref": "http://hyperschema.org/extend/hyperextend/field#" }
-        },
-        "jsonSchema": { "$ref": "http://hyperschema.org/core/meta#/definitions/jsonSchema" }
+        "template": {
+          "properties": {
+            "mediaTypes": { "$ref": "http://hyperschema.org/core/link#/definitions/mediaTypes" },
+            "fields": {
+              "type": "array",
+              "items": { "$ref": "http://hyperschema.org/extend/hyperextend/field#" }
+            },
+            "jsonSchema": { "$ref": "http://hyperschema.org/core/meta#/definitions/jsonSchema" }
+          }
+        }
       }
     }
-  }
+  ]
 }
 ```
 
