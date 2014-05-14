@@ -3,8 +3,7 @@
 Hyperextend is a library of components for extending media types. 
 
 **Status**: Draft  
-**Version**: 0.1.0  
-**Proposed registration**: TBD
+**Version**: 0.1.0
 
 ## Base
 
