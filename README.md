@@ -1,6 +1,6 @@
 # Hyperextend
 
-Hyperextend is a library of components for extending media types. 
+Hyperextend is a library of components for extending media types. It's purpose is to provide a group of reusable hypermedia components that can be used to extend any hypermedia JSON document. Each component builds on top of the `Base` component. Additionally, the entire library is built on top of the [Hyperschema.org Core Definitions](http://hyperschema.org/core/).
 
 **Status**: Draft  
 **Version**: 0.1.0
