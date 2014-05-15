@@ -320,7 +320,7 @@ Array of parameters for template
     "image/gif"
   ],
   "typeOf": "schema:Person#image",
-  "hreft": "/customer/{id}/image"
+  "hreft": "/customer/{id}/image",
   "embedAs": "image",
   "uriParams": [
     {
