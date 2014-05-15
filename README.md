@@ -2,6 +2,8 @@
 
 Hyperextend is a library of components for extending media types. It's purpose is to provide a group of reusable hypermedia components that can be used to extend any hypermedia JSON document. Each component builds on top of the `Base` component. Additionally, the entire library is built on top of the [Hyperschema.org Core Definitions](http://hyperschema.org/core/).
 
+While it is opinionated on how it groups the core definitions, it leaves the domain-specifics up to the API designer. Properties can be required, or made to include special rules for formating. Entire components or partial components can be used.
+
 **Status**: Draft  
 **Version**: 0.1.0
 
