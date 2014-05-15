@@ -120,10 +120,6 @@ Array of link relations.
 
 Available media types that represent resource on server
 
-#### `availableMethods`
-
-Available HTTP methods for resource/link
-
 #### `typeOf`
 
 Type of the property (e.g. Schema.org)
