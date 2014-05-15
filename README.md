@@ -11,6 +11,8 @@ While it is opinionated on how it groups the core definitions, it leaves the dom
 
 The base properties for any component.
 
+### Schema
+
 ```json
 {
   "title": "Base",
@@ -66,6 +68,8 @@ URI for schema to extend
 ## BaseLink
 
 Extends `Base`
+
+### Schema
 
 ```json
 {
@@ -148,6 +152,8 @@ Instructs client on how to embed the resource/link (TBD)
 ## Field
 
 Extends `Base`
+
+### Schema
 
 ```json
 {
@@ -234,6 +240,8 @@ Extends `BaseLink`
 
 A link is considered to be safe GET requests.
 
+### Schema
+
 ```json
 {
   "allOf": [
@@ -276,6 +284,8 @@ URL for resource/link.
 ## TemplatedLink
 
 Extends `BaseLink`
+
+### Schema
 
 ```json
 {
@@ -335,6 +345,8 @@ Array of parameters for template
 
 ## BaseQuery
 
+### Schema
+
 ```json
 {
   "properties": {
@@ -355,6 +367,8 @@ Array of query parameters
 ## Query
 
 Extends `Link` and `BaseQuery`
+
+### Schema
 
 ```json
 {
@@ -392,6 +406,8 @@ Extends `Link` and `BaseQuery`
 ## TemplatedQuery
 
 Extends `TemplatedLink` and `BaseQuery`
+
+### Schema
 
 ```json
 {
@@ -436,6 +452,8 @@ Extends `TemplatedLink` and `BaseQuery`
 ## BaseAction
 
 This is the only link type that can have a different HTTP method.
+
+### Schema
 
 ```json
 {
@@ -491,6 +509,8 @@ Extends `TemplatedLink` and `BaseAction`
 
 A way to have a URI template and Action in the same object.
 
+### Schema
+
 ```json
 {
   "allOf": [
@@ -534,7 +554,9 @@ A way to have a URI template and Action in the same object.
 
 Extends `Base`
 
-A semantic is a way to define semantics for properties
+A semantic is a way to define semantics for properties.
+
+### Schema
 
 ```json
 {
@@ -602,6 +624,8 @@ Human-readable label of the property
 Extends `Base`
 
 A resource template for adding and updating a resource.
+
+### Schema
 
 ```json
 {
