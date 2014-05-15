@@ -120,7 +120,7 @@ Available media types that represent resource on server
 
 Available HTTP methods for resource/link
 
-### `typeOf`
+#### `typeOf`
 
 Type of the property (e.g. Schema.org)
 
