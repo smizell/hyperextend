@@ -268,7 +268,7 @@ URL for resource/link.
     "image/gif"
   ],
   "typeOf": "schema:Person#image",
-  "href": "/customer/4/image"
+  "href": "/customer/4/image",
   "embedAs": "image"
 }
 ```
