@@ -162,7 +162,7 @@ Extends `Base`
         "currentValue": { "$ref": "http://hyperschema.org/core/fields#/definitions/value" },
         "value": { "$ref": "http://hyperschema.org/core/fields#/definitions/value" },
         "options": { "$ref": "http://hyperschema.org/core/fields#/definitions/options" },
-        "type": { "$ref": "http://hyperschema.org/mediatypes/html#/definitions/type" },
+        "type": { "$ref": "http://hyperschema.org/core/meta#/definitions/jsonType" },
         "format": { "$ref": "http://hyperschema.org/mediatypes/html#/definitions/type" },
         "label": { "$ref": "http://hyperschema.org/core/fields#/definitions/label" },
         "mapsTo": { "$ref": "http://hyperschema.org/core/fields#/definitions/mapsTo" }
