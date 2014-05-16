@@ -84,6 +84,7 @@ Extends `Base`
         "rels": { "$ref": "http://hyperschema.org/core/link#/definitions/rels" },
         "responseTypes": { "$ref": "http://hyperschema.org/core/link#/definitions/mediaTypes" },
         "typeOf": { "$ref": "http://hyperschema.org/core/meta#/definitions/typeOf" },
+        "returns": { "type": "string" },
         "embedAs": { "type": "string" }
       },
       "definitions": {
@@ -123,6 +124,10 @@ Available media types that represent resource on server
 #### `typeOf`
 
 Type of the property (e.g. Schema.org)
+
+#### `returns`
+
+URI to what the link returns
 
 #### `embedAs`
 
