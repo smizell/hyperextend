@@ -116,10 +116,6 @@ Array of link relations.
 
 Available media types that represent resource on server
 
-#### `availableMethods`
-
-Available HTTP methods for resource/link
-
 #### `typeOf`
 
 Type of the property (e.g. Schema.org)
@@ -240,6 +236,10 @@ A link is considered to be safe GET requests.
     { "$ref": "http://hyperschema.org/extend/hyperextend/baselink#" },
     {
       "properties": {
+        "availableMethods": "availableMethods": {
+          "type": "array",
+          "items": { "$ref": "http://hyperschema.org/protocols/http#/definitions/methods" }
+        },
         "href": { "$ref": "http://hyperschema.org/core/link#/definitions/href" }
       }
     }
@@ -248,6 +248,10 @@ A link is considered to be safe GET requests.
 ```
 
 ### Properties
+
+#### `availableMethods`
+
+Available HTTP methods for resource/link
 
 #### `href`
 
@@ -451,16 +455,27 @@ This is the only link type that can have a different HTTP method.
 
 ## Action
 
-Extends `Link` and `BaseAction`
+Extends `BaseLink` and `BaseAction`
 
 ```json
 {
   "allOf": [
     { "$ref": "http://hyperschema.org/extend/hyperextend/link#" },
-    { "$ref": "http://hyperschema.org/extend/hyperextend/baseaction#" }
+    { "$ref": "http://hyperschema.org/extend/hyperextend/baseaction#" },
+    {
+      "properties": {
+        "href": { "$ref": "http://hyperschema.org/core/link#/definitions/href" }
+      }
+    }
   ]
 }
 ```
+
+### Properties
+
+#### `href`
+
+URL for resource/link.
 
 ### Example
 
