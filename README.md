@@ -381,7 +381,7 @@ Extends `Link` and `BaseQuery`
     "image/jpg",
     "image/gif"
   ],
-  "hreft": "/customer_images",
+  "href": "/customer_images",
   "queryParams": [
     {
       "name": "id",
@@ -464,6 +464,7 @@ Extends `BaseLink` and `BaseAction`
     { "$ref": "http://hyperschema.org/extend/hyperextend/baseaction#" },
     {
       "properties": {
+        "requestTypes": { "$ref": "http://hyperschema.org/core/link#/definitions/mediaTypes" },
         "href": { "$ref": "http://hyperschema.org/core/link#/definitions/href" }
       }
     }
@@ -472,6 +473,10 @@ Extends `BaseLink` and `BaseAction`
 ```
 
 ### Properties
+
+#### `requestTypes`
+
+Types that can be sent to the server
 
 #### `href`
 
